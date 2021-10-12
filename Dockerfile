@@ -1,5 +1,8 @@
 FROM opcycle/openjdk:8
 
+LABEL maintainer="OpCycle <oss@opcycle.net>"
+LABEL repository="https://github.com/opcycle/docker-nexus"
+
 ENV NEXUS_USER="nexus" \
     NEXUS_UID="8983" \
     NEXUS_GROUP="nexus" \
