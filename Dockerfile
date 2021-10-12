@@ -8,17 +8,16 @@ ENV NEXUS_USER="nexus" \
 
 RUN groupadd -r --gid "$NEXUS_GID" "$NEXUS_GROUP"
 RUN useradd -r --uid "$NEXUS_UID" --gid "$NEXUS_GID" "$NEXUS_USER"
-RUN curl -L $NEXUS_DIST_URL --output /tmp/nexus.tar.gz
-
-RUN tar -C /tmp --extract --file /tmp/nexus.tar.gz
-RUN rm /tmp/nexus.tar.gz
-RUN mv /tmp/nexus-* /opt/nexus 
-RUN rm -rf /opt/nexus/bin /opt/nexus/*.txt /opt/nexus/.install4j /tmp/*
+RUN curl -L $NEXUS_DIST_URL --output /tmp/nexus.tar.gz; \
+    tar -C /tmp --extract --file /tmp/nexus.tar.gz; \
+    rm /tmp/nexus.tar.gz; \
+    mv /tmp/nexus-* /opt/nexus; \
+    rm -rf /opt/nexus/bin /opt/nexus/*.txt /opt/nexus/.install4j /tmp/*; \
+    mkdir -p /opt/nexus/data; \
+    chown nexus:nexus -R /opt/nexus
 
 COPY nexus /opt/nexus
 RUN chmod +x /opt/nexus/nexus
-RUN mkdir -p /opt/nexus/data
-RUN chown nexus:nexus -R /opt/nexus
 
 VOLUME /opt/nexus/data
 WORKDIR /opt/nexus
