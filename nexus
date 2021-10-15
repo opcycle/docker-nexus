@@ -4,7 +4,7 @@ cd /opt/nexus
 
 exec java \
     -server \
-    $JAVA_ARGS
+    $JAVA_ARGS \
     -XX:+UnlockDiagnosticVMOptions \
     -XX:MaxDirectMemorySize=2703m \
     -XX:+UnlockDiagnosticVMOptions \
